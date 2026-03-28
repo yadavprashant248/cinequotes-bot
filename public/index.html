@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CineQuotes — Legendary Movie Lines on WhatsApp</title>
+  <meta name="description" content="Get iconic movie dialogues on WhatsApp every day — personalized to your vibe. Gangster, Sigma, Gen-Z & more. Free forever.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="noise"></div>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <!-- ─── NAV ─────────────────────────────────────────────── -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="brand-icon">🎬</span>
+      <span class="brand-name">CineQuotes</span>
+    </div>
+    <div class="nav-pill">
+      <span class="live-dot"></span>
+      <span id="sub-count">0</span> subscribers
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="badge">📱 WhatsApp • Daily • 100% Free</div>
+      <h1 class="hero-title">
+        Legendary movie lines,<br>
+        <span class="gradient-text">straight to your WhatsApp</span>
+      </h1>
+      <p class="hero-sub">
+        Pick your vibe. Get iconic dialogues from timeless films — curated for your personality, every single day. Just your number. That's it.
+      </p>
+      <div class="floating-quotes" aria-hidden="true">
+        <div class="fq fq-1">"I'm gonna make him an offer he can't refuse." <span>The Godfather</span></div>
+        <div class="fq fq-2">"You're Kenough." <span>Barbie (2023)</span></div>
+        <div class="fq fq-3">"Maximum effort!" <span>Deadpool</span></div>
+        <div class="fq fq-4">"Get busy living or get busy dying." <span>Shawshank</span></div>
+        <div class="fq fq-5">"I am Iron Man." <span>Avengers: Endgame</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SUBSCRIPTION FORM ────────────────────────────────── -->
+  <section class="form-section" id="subscribe">
+    <div class="form-card" id="form-card">
+
+      <!-- Step indicator -->
+      <div class="steps">
+        <div class="step active" id="step-dot-1"><span>1</span></div>
+        <div class="step-line" id="step-line-1"></div>
+        <div class="step" id="step-dot-2"><span>2</span></div>
+        <div class="step-line" id="step-line-2"></div>
+        <div class="step" id="step-dot-3"><span>3</span></div>
+      </div>
+
+      <!-- ── Step 1: details ────────────────────────────── -->
+      <div class="form-step" id="step-1">
+        <div class="step-header">
+          <div class="step-emoji">👋</div>
+          <h2>Who are you?</h2>
+          <p>Your nickname and WhatsApp number — that's all</p>
+        </div>
+        <div class="input-group">
+          <label for="nickname">Your nickname</label>
+          <input type="text" id="nickname" placeholder="e.g. BigBoss, Yolo, Slay..." autocomplete="off" maxlength="30" />
+        </div>
+        <div class="input-group">
+          <label for="phone">WhatsApp number <small>(with country code)</small></label>
+          <div class="phone-input-wrap">
+            <span class="phone-prefix">📱</span>
+            <input type="tel" id="phone" placeholder="+91 98765 43210" autocomplete="tel" />
+          </div>
+          <span class="hint">We'll never spam. Reply STOP anytime to unsubscribe.</span>
+        </div>
+        <button class="btn btn-primary" id="btn-step1">
+          Next — Pick your vibe <span class="arrow">→</span>
+        </button>
+      </div>
+
+      <!-- ── Step 2: personality ────────────────────────── -->
+      <div class="form-step hidden" id="step-2">
+        <div class="step-header">
+          <div class="step-emoji">🎭</div>
+          <h2>What describes you?</h2>
+          <p>Be honest — no judgment here 😏</p>
+        </div>
+        <div class="personality-grid" id="personality-grid"></div>
+        <div class="btn-row">
+          <button class="btn btn-ghost" id="btn-back-1">← Back</button>
+          <button class="btn btn-primary" id="btn-step2" disabled>
+            Subscribe Now 🚀
+          </button>
+        </div>
+      </div>
+
+      <!-- ── Step 3: success ────────────────────────────── -->
+      <div class="form-step hidden" id="step-3">
+        <div class="success-screen">
+          <div class="success-anim">
+            <div class="success-ring"></div>
+            <div class="success-checkmark">✓</div>
+          </div>
+          <h2 id="success-title">You're in, Legend!</h2>
+          <p id="success-msg">Check your WhatsApp — your first legendary quote just landed. Every day, same vibe, pure cinema. 🎬</p>
+          <div class="success-quote-preview" id="preview-quote"></div>
+          <button class="btn btn-primary" id="btn-reset">Subscribe another number</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── HOW IT WORKS ────────────────────────────────────── -->
+  <section class="how-section">
+    <h2 class="section-title">How it works</h2>
+    <div class="steps-row">
+      <div class="how-card">
+        <div class="how-icon">✍️</div>
+        <h3>1. Enter your details</h3>
+        <p>Just your WhatsApp number and a nickname. No email, no password, nothing else.</p>
+      </div>
+      <div class="how-arrow">→</div>
+      <div class="how-card">
+        <div class="how-icon">🎭</div>
+        <h3>2. Pick your vibe</h3>
+        <p>Gangster? Sigma? Pookie? Gen-Z? We match the quote to your personality.</p>
+      </div>
+      <div class="how-arrow">→</div>
+      <div class="how-card">
+        <div class="how-icon">📲</div>
+        <h3>3. Get daily gems</h3>
+        <p>One legendary movie line every morning. Screenshot-worthy, every single time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PERSONALITIES SHOWCASE ─────────────────────────── -->
+  <section class="vibes-section">
+    <h2 class="section-title">Choose your character</h2>
+    <p class="section-sub">7 personalities. Hundreds of iconic lines. One WhatsApp message a day.</p>
+    <div class="vibes-scroll" id="vibes-showcase"></div>
+  </section>
+
+  <!-- ─── SAMPLE QUOTES ────────────────────────────────────── -->
+  <section class="samples-section">
+    <h2 class="section-title">A taste of what's coming</h2>
+    <div class="samples-grid" id="samples-grid"></div>
+  </section>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer-brand">🎬 CineQuotes</div>
+    <p class="footer-tagline">Powered by cinema. Delivered via WhatsApp.</p>
+    <p class="footer-legal">No spam, ever. Reply <strong>STOP</strong> to unsubscribe instantly.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
