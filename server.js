@@ -49,8 +49,8 @@ function sendWhatsApp(phone, message) {
     const chatId  = toChatId(phone);
     const payload = JSON.stringify({
       chatId,
-      urlFile: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=800&auto=format&fit=crop',
-      fileName: 'cinequotes-bg.jpg',
+      urlFile: 'https://media1.tenor.com/m/SeLBRCUiQaoAAAAC/absolute-cinema-cinema.gif',
+      fileName: 'absolute-cinema.gif',
       caption: message
     });
     const url = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendFileByUrl/${GA_TOKEN}`;
