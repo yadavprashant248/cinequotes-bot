@@ -1,12 +1,12 @@
 # 🎬 CineQuotes — Legendary Movie Lines on WhatsApp
 
-> Subscribe with your WhatsApp number, pick your personality (Gangster, Pookie, Sigma, Gen-Z...) and get iconic movie dialogues delivered to you every day.
+> Subscribe with your WhatsApp number, pick your personality (Gangster, Pookie, Sigma...) and get iconic movie dialogues delivered to you every day.
 
 ---
 
 ## ✨ Features
 
-- 🎭 **7 personality types** — Gangster, Pookie, Playboy, Sigma, Gen-Z, Hustler, Philosopher
+- 🎭 **6 personality types** — Gangster, Pookie, Playboy, Sigma, Hustler, Philosopher
 - 📱 **WhatsApp delivery** via Twilio (sandbox & production)
 - ⏰ **Daily scheduled quotes** via `node-cron`
 - 💾 **SQLite persistence** — no external database needed
@@ -120,7 +120,6 @@ moviequotes-whatsapp/
 | 🥺 Pookie | Romance, feelings, soft hours | *"If you're a bird, I'm a bird."* |
 | 😎 Playboy | Charming, slick, suave | *"The name's Bond. James Bond."* |
 | 🐺 Sigma | Lone wolf, silent grind | *"Don't get attached…"* |
-| ✨ Gen-Z | Slay, no cap, main character | *"You're Kenough."* |
 | 💰 Hustler | Grind, ambition, wins | *"Get busy living or get busy dying."* |
 | 🧠 Philosopher | Deep, existential, big brain | *"What is real?"* |
 

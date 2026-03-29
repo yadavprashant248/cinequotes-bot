@@ -5,20 +5,17 @@ const PERSONALITIES = [
   { key: 'pookie',      emoji: '🥺', name: 'The Pookie',      hint: "Love, feelings & soft hours only.",             accent: 'acc-pookie'      },
   { key: 'playboy',     emoji: '😎', name: 'The Playboy',     hint: "Charming, slick & always in style.",            accent: 'acc-playboy'     },
   { key: 'sigma',       emoji: '🐺', name: 'The Sigma',       hint: "Silent, independent, lone wolf energy.",        accent: 'acc-sigma'       },
-  { key: 'genz',        emoji: '✨', name: 'The Gen-Z',       hint: "Slay, no cap, it's giving main character.",    accent: 'acc-genz'        },
   { key: 'hustler',     emoji: '💰', name: 'The Hustler',     hint: "Grind now. Sleep later. Always winning.",       accent: 'acc-hustler'     },
   { key: 'philosopher', emoji: '🧠', name: 'The Philosopher', hint: "Deep thoughts, existential vibes, big brain.", accent: 'acc-philosopher' },
 ];
 
 const SAMPLE_QUOTES = [
   { personality: 'gangster',    accent: 'acc-gangster',    quote: "I'm gonna make him an offer he can't refuse.",                                          movie: 'The Godfather (1972)'                     },
-  { personality: 'genz',        accent: 'acc-genz',        quote: "You're Kenough.",                                                                        movie: 'Barbie (2023)'                            },
   { personality: 'sigma',       accent: 'acc-sigma',       quote: "Don't let yourself get attached to anything you are not willing to walk out on in 30 seconds flat.", movie: 'Heat (1995)'             },
   { personality: 'pookie',      accent: 'acc-pookie',      quote: "If you're a bird, I'm a bird.",                                                          movie: 'The Notebook (2004)'                      },
   { personality: 'hustler',     accent: 'acc-hustler',     quote: "Get busy living or get busy dying.",                                                     movie: 'The Shawshank Redemption (1994)'          },
   { personality: 'playboy',     accent: 'acc-playboy',     quote: "The name's Bond. James Bond.",                                                           movie: 'Casino Royale (2006)'                     },
   { personality: 'philosopher', accent: 'acc-philosopher', quote: "What is real? How do you define real?",                                                  movie: 'The Matrix (1999)'                        },
-  { personality: 'genz',        accent: 'acc-genz',        quote: "That's all it is, Miles. A leap of faith.",                                              movie: 'Spider-Man: Into the Spider-Verse (2018)' },
   { personality: 'hustler',     accent: 'acc-hustler',     quote: "A million dollars isn't cool. You know what's cool? A billion dollars.",                 movie: 'The Social Network (2010)'                },
 ];
 
@@ -27,7 +24,6 @@ const TEASER = {
   pookie:      `"If you're a bird, I'm a bird." — The Notebook`,
   playboy:     `"The name's Bond. James Bond." — Casino Royale`,
   sigma:       `"Don't get attached to anything you aren't willing to walk out on in 30 seconds." — Heat`,
-  genz:        `"You're Kenough." — Barbie (2023)`,
   hustler:     `"Get busy living or get busy dying." — The Shawshank Redemption`,
   philosopher: `"What is real? How do you define real?" — The Matrix`,
 };

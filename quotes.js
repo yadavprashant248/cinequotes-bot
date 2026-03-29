@@ -14,6 +14,9 @@ const quotes = {
     { movie: "The Usual Suspects", quote: "The greatest trick the devil ever pulled was convincing the world he didn't exist.", year: 1995 },
     { movie: "Heat", quote: "Don't let yourself get attached to anything you are not willing to walk out on in 30 seconds flat.", year: 1995 },
     { movie: "Training Day", quote: "King Kong ain't got s*** on me!", year: 2001 },
+    { movie: "The Departed", quote: "I'm the guy who does his job. You must be the other guy.", year: 2006 },
+    { movie: "Reservoir Dogs", quote: "Are you gonna bark all day, little doggie, or are you gonna bite?", year: 1992 },
+    { movie: "American Gangster", quote: "The loudest one in the room is the weakest one in the room.", year: 2007 },
   ],
   pookie: [
     { movie: "Titanic", quote: "I'm the king of the world!", year: 1997 },
@@ -28,6 +31,9 @@ const quotes = {
     { movie: "10 Things I Hate About You", quote: "I burn, I pine, I perish.", year: 1999 },
     { movie: "La La Land", quote: "Here's to the ones who dream, foolish as they may seem.", year: 2016 },
     { movie: "Before Sunrise", quote: "I believe if there's any kind of God it wouldn't be in any of us — it'd be in the space between us.", year: 1995 },
+    { movie: "Notting Hill", quote: "I'm also just a girl, standing in front of a boy, asking him to love her.", year: 1999 },
+    { movie: "Love Actually", quote: "To me, you are perfect.", year: 2003 },
+    { movie: "The Princess Bride", quote: "As you wish.", year: 1987 },
   ],
   playboy: [
     { movie: "James Bond: Casino Royale", quote: "The name's Bond. James Bond.", year: 2006 },
@@ -42,6 +48,9 @@ const quotes = {
     { movie: "The Social Network", quote: "You're going to go through life thinking that girls don't like you because you're a tech geek. I want you to know, from the bottom of my heart, that won't be true.", year: 2010 },
     { movie: "Crazy, Stupid, Love", quote: "Be better than the Gap.", year: 2011 },
     { movie: "Hitch", quote: "Basic principle: no matter what, no matter when, no matter who — any man has a chance to sweep any woman off her feet.", year: 2005 },
+    { movie: "Iron Man 2", quote: "I have successfully privatized world peace.", year: 2010 },
+    { movie: "Ocean's Eleven", quote: "Are you in or are you out? Right now.", year: 2001 },
+    { movie: "Ferris Bueller's Day Off", quote: "Life moves pretty fast. If you don't stop and look around once in a while, you could miss it.", year: 1986 },
   ],
   sigma: [
     { movie: "Fight Club", quote: "You are not your job. You're not how much money you have in the bank.", year: 1999 },
@@ -56,22 +65,9 @@ const quotes = {
     { movie: "The Revenant", quote: "I ain't afraid to die anymore. I done it already.", year: 2015 },
     { movie: "John Wick", quote: "People keep asking if I'm back. Yeah, I'm thinking I'm back.", year: 2014 },
     { movie: "Mad Max: Fury Road", quote: "WITNESS ME!", year: 2015 },
-  ],
-  genz: [
-    { movie: "Spider-Man: Into the Spider-Verse", quote: "That's all it is, Miles. A leap of faith.", year: 2018 },
-    { movie: "Everything Everywhere All at Once", quote: "Of all the places I could be, I just want to be here with you.", year: 2022 },
-    { movie: "The Avengers", quote: "We have a Hulk.", year: 2012 },
-    { movie: "Deadpool", quote: "Maximum effort!", year: 2016 },
-    { movie: "Shrek", quote: "Ogres are like onions. We both have layers.", year: 2001 },
-    { movie: "The Truman Show", quote: "Good morning! And in case I don't see ya — good afternoon, good evening, and good night!", year: 1998 },
-    { movie: "Knives Out", quote: "I did it to save my family. Now I want to save myself.", year: 2019 },
-    { movie: "Get Out", quote: "Do they know I'm Black?", year: 2017 },
-    { movie: "Parasite", quote: "Act your age.", year: 2019 },
-    { movie: "Hereditary", quote: "This isn't happening.", year: 2018 },
-    { movie: "Midsommar", quote: "I think I'm having a feeling.", year: 2019 },
-    { movie: "Barbie", quote: "You're Kenough.", year: 2023 },
-    { movie: "Oppenheimer", quote: "Now I am become Death, the destroyer of worlds.", year: 2023 },
-    { movie: "Poor Things", quote: "I want to experience everything!", year: 2023 },
+    { movie: "Taxi Driver", quote: "You talkin' to me?", year: 1976 },
+    { movie: "Nightcrawler", quote: "I will never ask you to do anything that I wouldn't do myself.", year: 2014 },
+    { movie: "Blade Runner", quote: "I've seen things you people wouldn't believe.", year: 1982 },
   ],
   hustler: [
     { movie: "Rocky", quote: "Yo, Adrian! I did it!", year: 1976 },
@@ -86,6 +82,9 @@ const quotes = {
     { movie: "The Shawshank Redemption", quote: "Get busy living or get busy dying.", year: 1994 },
     { movie: "Jerry Maguire", quote: "Show me the money!", year: 1996 },
     { movie: "Wall Street", quote: "Greed, for lack of a better word, is good.", year: 1987 },
+    { movie: "Gladiator", quote: "What we do in life echoes in eternity.", year: 2000 },
+    { movie: "Margin Call", quote: "Be first, be smarter, or cheat.", year: 2011 },
+    { movie: "The Founder", quote: "Business is war. It's dog eat dog, rat eat rat.", year: 2016 },
   ],
   philosopher: [
     { movie: "The Matrix", quote: "What is real? How do you define real?", year: 1999 },
@@ -100,6 +99,9 @@ const quotes = {
     { movie: "Melancholia", quote: "The Earth is evil. We don't need to grieve for it.", year: 2011 },
     { movie: "Eternal Sunshine of the Spotless Mind", quote: "How happy is the blameless vestal's lot? The world forgetting, by the world forgot.", year: 2004 },
     { movie: "Donnie Darko", quote: "Every living creature on this Earth dies alone.", year: 2001 },
+    { movie: "The Truman Show", quote: "We accept the reality of the world with which we're presented. It's as simple as that.", year: 1998 },
+    { movie: "Synecdoche, New York", quote: "The end is built into the beginning.", year: 2008 },
+    { movie: "V for Vendetta", quote: "Ideas are bulletproof.", year: 2005 },
   ],
 };
 
@@ -108,13 +110,12 @@ const personalityLabels = {
   pookie: "🥺 The Pookie",
   playboy: "😎 The Playboy",
   sigma: "🐺 The Sigma",
-  genz: "✨ The Gen-Z Icon",
   hustler: "💰 The Hustler",
   philosopher: "🧠 The Philosopher",
 };
 
 function getRandomQuote(personality) {
-  const list = quotes[personality] || quotes.genz;
+  const list = quotes[personality] || quotes.gangster;
   return list[Math.floor(Math.random() * list.length)];
 }
 
