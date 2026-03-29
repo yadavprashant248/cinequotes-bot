@@ -153,8 +153,16 @@ app.post('/api/unsubscribe', (req, res) => {
 app.post('/webhook/greenapi', async (req, res) => {
   try {
     const body = req.body;
-    if (body.typeWebhook === 'incomingMessageReceived' && body.messageData?.typeMessage === 'textMessage') {
-      const text = body.messageData.textMessageData.textMessage.trim().toUpperCase();
+    if (body.typeWebhook === 'incomingMessageReceived') {
+      let text = '';
+      if (body.messageData?.typeMessage === 'textMessage') {
+        text = body.messageData.textMessageData?.textMessage || '';
+      } else if (body.messageData?.typeMessage === 'extendedTextMessage') {
+        text = body.messageData.extendedTextMessageData?.text || '';
+      }
+      
+      text = text.trim().toUpperCase();
+      
       if (text === 'STOP' || text === 'UNSUBSCRIBE' || text === 'CANCEL') {
         const sender = body.senderData.sender;
         const phone = '+' + sender.replace('@c.us', '');
