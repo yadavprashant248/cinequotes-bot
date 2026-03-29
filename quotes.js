@@ -168,6 +168,8 @@ const quotes = {
     { movie: "Mad Max: Fury Road", quote: "My name is Max. My world is fire and blood.", year: 2015 },
     { movie: "Nightcrawler", quote: "My motto is if you want to win the lottery you've got to make the money to buy a ticket.", year: 2014 },
     { movie: "The Punisher", quote: "This is not revenge. It's punishment.", year: 2004 },
+    { movie: "Fight Club", quote: "The things you own end up owning you.", year: 1999 },
+    { movie: "Fight Club", quote: "Advertising has us chasing cars and clothes, working jobs we hate so we can buy s*** we don't need.", year: 1999 },
   ],
   hustler: [
     { movie: "Rocky", quote: "Yo, Adrian! I did it!", year: 1976 },
@@ -252,6 +254,8 @@ const quotes = {
     { movie: "2001: A Space Odyssey", quote: "Its origin and purpose, still a total mystery.", year: 1968 },
     { movie: "Arrival", quote: "Memory is a strange thing. It doesn't work like I thought it did.", year: 2016 },
     { movie: "A Ghost Story", quote: "We build our legacy piece by piece, and maybe the whole world will remember you or maybe just a couple of people.", year: 2017 },
+    { movie: "Fight Club", quote: "We're the middle children of history, man. No purpose or place. Our Great War's a spiritual war... our Great Depression is our lives.", year: 1999 },
+    { movie: "Fight Club", quote: "We've all been raised on television to believe that one day we'd all be millionaires, and movie gods, and rock stars. But we won't.", year: 1999 },
   ],
 };
 
