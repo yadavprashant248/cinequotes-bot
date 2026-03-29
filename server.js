@@ -49,7 +49,7 @@ function sendWhatsApp(phone, message) {
     const chatId  = toChatId(phone);
     const payload = JSON.stringify({
       chatId,
-      urlFile: 'https://i.kym-cdn.com/photos/images/newsfeed/002/692/374/6fc.jpg',
+      urlFile: 'https://i.ibb.co/6P69Zz7/absolute-cinema.jpg',
       fileName: 'absolute-cinema.jpg',
       caption: message
     });
@@ -202,8 +202,19 @@ app.post('/webhook/greenapi', async (req, res) => {
           const sub = Subscribers.getByPhone(phone);
           if (sub && sub.active) {
             const quote = getRandomQuote(sub.personality);
-            const msg = formatQuoteMessage(sub.nickname, sub.personality, quote);
-            await sendWhatsApp(phone, msg);
+            const msg   = formatQuoteMessage(sub.nickname, sub.personality, quote);
+            
+            // Re-using the working text-only send logic for "MORE"
+            const payloads = JSON.stringify({ chatId: sender, message: msg });
+            const urls = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendMessage/${GA_TOKEN}`;
+            const reqPost = https.request(urls, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payloads) },
+            });
+            reqPost.on('error', console.error);
+            reqPost.write(payloads);
+            reqPost.end();
+
             Subscribers.updateLastSent(phone);
           }
         }
@@ -225,7 +236,12 @@ app.post('/api/send-now', async (req, res) => {
     try {
       const quote = getRandomQuote(sub.personality);
       const msg   = formatQuoteMessage(sub.nickname, sub.personality, quote);
-      await sendWhatsApp(sub.phone, msg);
+      
+      // Use the stable sendMessage for reliability
+      const payloads = JSON.stringify({ chatId: toChatId(sub.phone), message: msg });
+      const urls = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendMessage/${GA_TOKEN}`;
+      https.request(urls, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payloads) } }).end(payloads);
+
       Subscribers.updateLastSent(sub.phone);
       results.push({ phone: sub.phone, status: 'sent' });
     } catch (e) {
@@ -253,7 +269,11 @@ cron.schedule(schedule, async () => {
     try {
       const quote = getRandomQuote(sub.personality);
       const msg   = formatQuoteMessage(sub.nickname, sub.personality, quote);
-      await sendWhatsApp(sub.phone, msg);
+      
+      const payloads = JSON.stringify({ chatId: toChatId(sub.phone), message: msg });
+      const urls = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendMessage/${GA_TOKEN}`;
+      https.request(urls, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payloads) } }).end(payloads);
+
       Subscribers.updateLastSent(sub.phone);
       console.log(`  ✓ ${sub.phone} (${sub.personality})`);
     } catch (e) {
