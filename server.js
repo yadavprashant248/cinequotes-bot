@@ -54,7 +54,7 @@ function sendWhatsApp(phone, message) {
       caption: message
     });
     // Updated to use the correct domain and host from your dashboard screenshot
-    const url = `https://7107.api.greenapi.com/waInstance${GA_INSTANCE}/sendFileByUrl/${GA_TOKEN}`;
+    const url = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendFileByUrl/${GA_TOKEN}`;
 
     const req = https.request(url, {
       method: 'POST',
@@ -173,7 +173,7 @@ app.post('/webhook/greenapi', async (req, res) => {
           
           // Send a plain text confirmation (no image needed here)
           const payload = JSON.stringify({ chatId: sender, message: "🛑 You have been successfully unsubscribed from CineQuotes. You will no longer receive messages. Have a great day!" });
-          const url = `https://7107.api.greenapi.com/waInstance${GA_INSTANCE}/sendMessage/${GA_TOKEN}`;
+          const url = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendMessage/${GA_TOKEN}`;
           
           const reqPost = https.request(url, {
             method: 'POST',
