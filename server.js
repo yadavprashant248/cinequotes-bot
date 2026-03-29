@@ -116,7 +116,7 @@ app.post('/api/subscribe', async (req, res) => {
         `🎉 *Yo ${nickname.trim()}!* Welcome to *CineQuotes* — ${personalityLabels[personality]}!\n\n` +
         `Here's your first legendary line:\n\n` +
         `_"${quote.quote}"_\n\n— *${quote.movie}* (${quote.year})\n\n` +
-        `━━━━━━━━━━━━━━━━━━━━\nExpect a fresh quote every morning. Reply *STOP* to unsubscribe anytime 🎬`;
+        `━━━━━━━━━━━━━━━━━━━━\nExpect a fresh quote every morning. Reply *MORE* for another quote, or *STOP* to unsubscribe 🎬`;
 
       await sendWhatsApp(cleaned, welcomeMsg);
       Subscribers.updateLastSent(cleaned);
@@ -162,24 +162,34 @@ app.post('/webhook/greenapi', async (req, res) => {
       }
       
       text = text.trim().toUpperCase();
+      const sender = body.senderData?.sender;
       
-      if (text === 'STOP' || text === 'UNSUBSCRIBE' || text === 'CANCEL') {
-        const sender = body.senderData.sender;
+      if (sender) {
         const phone = '+' + sender.replace('@c.us', '');
         
-        Subscribers.remove(phone);
-        
-        // Send a plain text confirmation (no image needed here)
-        const payload = JSON.stringify({ chatId: sender, message: "🛑 You have been successfully unsubscribed from CineQuotes. You will no longer receive messages. Have a great day!" });
-        const url = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendMessage/${GA_TOKEN}`;
-        
-        const reqPost = https.request(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) },
-        });
-        reqPost.on('error', console.error);
-        reqPost.write(payload);
-        reqPost.end();
+        if (text === 'STOP' || text === 'UNSUBSCRIBE' || text === 'CANCEL') {
+          Subscribers.remove(phone);
+          
+          // Send a plain text confirmation (no image needed here)
+          const payload = JSON.stringify({ chatId: sender, message: "🛑 You have been successfully unsubscribed from CineQuotes. You will no longer receive messages. Have a great day!" });
+          const url = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendMessage/${GA_TOKEN}`;
+          
+          const reqPost = https.request(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) },
+          });
+          reqPost.on('error', console.error);
+          reqPost.write(payload);
+          reqPost.end();
+        } else if (text === 'MORE') {
+          const sub = Subscribers.getByPhone(phone);
+          if (sub && sub.active) {
+            const quote = getRandomQuote(sub.personality);
+            const msg = formatQuoteMessage(sub.nickname, sub.personality, quote);
+            await sendWhatsApp(phone, msg);
+            Subscribers.updateLastSent(phone);
+          }
+        }
       }
     }
   } catch (err) {
