@@ -119,7 +119,23 @@ app.post('/api/subscribe', async (req, res) => {
         `_"${quote.quote}"_\n\n— *${quote.movie}* (${quote.year})\n\n` +
         `━━━━━━━━━━━━━━━━━━━━\nExpect a fresh quote every morning. Reply *MORE* for another quote, or *STOP* to unsubscribe 🎬`;
 
-      await sendWhatsApp(cleaned, welcomeMsg);
+      // Use TEXT message for welcome to test connectivity!
+      const payloads = JSON.stringify({ chatId: toChatId(cleaned), message: welcomeMsg });
+      const urls = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendMessage/${GA_TOKEN}`;
+      await new Promise((resolve, reject) => {
+        const reqPost = https.request(urls, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payloads) },
+        }, (res) => {
+          let d = '';
+          res.on('data', c => d += c);
+          res.on('end', () => res.statusCode === 200 ? resolve(JSON.parse(d)) : reject(new Error(d)));
+        });
+        reqPost.on('error', reject);
+        reqPost.write(payloads);
+        reqPost.end();
+      });
+
       Subscribers.updateLastSent(cleaned);
       whatsappSent = true;
     } catch (err) {
