@@ -47,8 +47,13 @@ function sendWhatsApp(phone, message) {
 
   return new Promise((resolve, reject) => {
     const chatId  = toChatId(phone);
-    const payload = JSON.stringify({ chatId, message });
-    const url     = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendMessage/${GA_TOKEN}`;
+    const payload = JSON.stringify({
+      chatId,
+      urlFile: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=800&auto=format&fit=crop',
+      fileName: 'cinequotes-bg.jpg',
+      caption: message
+    });
+    const url = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendFileByUrl/${GA_TOKEN}`;
 
     const req = https.request(url, {
       method: 'POST',
@@ -144,6 +149,37 @@ app.post('/api/unsubscribe', (req, res) => {
   res.json({ success: true, message: `Unsubscribed ${cleaned}.` });
 });
 
+// GreenAPI Webhook to listen for STOP messages
+app.post('/webhook/greenapi', async (req, res) => {
+  try {
+    const body = req.body;
+    if (body.typeWebhook === 'incomingMessageReceived' && body.messageData?.typeMessage === 'textMessage') {
+      const text = body.messageData.textMessageData.textMessage.trim().toUpperCase();
+      if (text === 'STOP' || text === 'UNSUBSCRIBE' || text === 'CANCEL') {
+        const sender = body.senderData.sender;
+        const phone = '+' + sender.replace('@c.us', '');
+        
+        Subscribers.remove(phone);
+        
+        // Send a plain text confirmation (no image needed here)
+        const payload = JSON.stringify({ chatId: sender, message: "🛑 You have been successfully unsubscribed from CineQuotes. You will no longer receive messages. Have a great day!" });
+        const url = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendMessage/${GA_TOKEN}`;
+        
+        const reqPost = https.request(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) },
+        });
+        reqPost.on('error', console.error);
+        reqPost.write(payload);
+        reqPost.end();
+      }
+    }
+  } catch (err) {
+    console.error('Webhook error:', err);
+  }
+  res.sendStatus(200);
+});
+
 // POST /api/send-now  (manual admin trigger — open in browser or curl)
 app.post('/api/send-now', async (req, res) => {
   const subs = Subscribers.getActive();
@@ -171,7 +207,7 @@ app.post('/api/send-now', async (req, res) => {
 });
 
 // ─── Daily cron ───────────────────────────────────────────────────────────────
-const schedule = process.env.QUOTE_CRON_SCHEDULE || '0 9 * * *';
+const schedule = process.env.QUOTE_CRON_SCHEDULE || '*/30 * * * *';
 
 cron.schedule(schedule, async () => {
   const now  = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
