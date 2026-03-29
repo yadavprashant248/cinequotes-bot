@@ -49,8 +49,8 @@ function sendWhatsApp(phone, message) {
     const chatId  = toChatId(phone);
     const payload = JSON.stringify({
       chatId,
-      urlFile: 'https://i.ibb.co/6P69Zz7/absolute-cinema.jpg',
-      fileName: 'absolute-cinema.jpg',
+      urlFile: 'https://cinequotes-bot.onrender.com/absolute-cinema.png',
+      fileName: 'absolute-cinema.png',
       caption: message
     });
     // Updated to use the correct domain and host from your dashboard screenshot
@@ -119,22 +119,7 @@ app.post('/api/subscribe', async (req, res) => {
         `_"${quote.quote}"_\n\n— *${quote.movie}* (${quote.year})\n\n` +
         `━━━━━━━━━━━━━━━━━━━━\nExpect a fresh quote every morning. Reply *MORE* for another quote, or *STOP* to unsubscribe 🎬`;
 
-      // Use TEXT message for welcome to test connectivity!
-      const payloads = JSON.stringify({ chatId: toChatId(cleaned), message: welcomeMsg });
-      const urls = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendMessage/${GA_TOKEN}`;
-      await new Promise((resolve, reject) => {
-        const reqPost = https.request(urls, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payloads) },
-        }, (res) => {
-          let d = '';
-          res.on('data', c => d += c);
-          res.on('end', () => res.statusCode === 200 ? resolve(JSON.parse(d)) : reject(new Error(d)));
-        });
-        reqPost.on('error', reject);
-        reqPost.write(payloads);
-        reqPost.end();
-      });
+      await sendWhatsApp(cleaned, welcomeMsg);
 
       Subscribers.updateLastSent(cleaned);
       whatsappSent = true;
@@ -204,16 +189,8 @@ app.post('/webhook/greenapi', async (req, res) => {
             const quote = getRandomQuote(sub.personality);
             const msg   = formatQuoteMessage(sub.nickname, sub.personality, quote);
             
-            // Re-using the working text-only send logic for "MORE"
-            const payloads = JSON.stringify({ chatId: sender, message: msg });
-            const urls = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendMessage/${GA_TOKEN}`;
-            const reqPost = https.request(urls, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payloads) },
-            });
-            reqPost.on('error', console.error);
-            reqPost.write(payloads);
-            reqPost.end();
+            // Re-using the reliable sendWhatsApp function using our internal Render URL
+            await sendWhatsApp(phone, msg);
 
             Subscribers.updateLastSent(phone);
           }
@@ -237,10 +214,7 @@ app.post('/api/send-now', async (req, res) => {
       const quote = getRandomQuote(sub.personality);
       const msg   = formatQuoteMessage(sub.nickname, sub.personality, quote);
       
-      // Use the stable sendMessage for reliability
-      const payloads = JSON.stringify({ chatId: toChatId(sub.phone), message: msg });
-      const urls = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendMessage/${GA_TOKEN}`;
-      https.request(urls, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payloads) } }).end(payloads);
+      await sendWhatsApp(sub.phone, msg);
 
       Subscribers.updateLastSent(sub.phone);
       results.push({ phone: sub.phone, status: 'sent' });
@@ -270,9 +244,7 @@ cron.schedule(schedule, async () => {
       const quote = getRandomQuote(sub.personality);
       const msg   = formatQuoteMessage(sub.nickname, sub.personality, quote);
       
-      const payloads = JSON.stringify({ chatId: toChatId(sub.phone), message: msg });
-      const urls = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendMessage/${GA_TOKEN}`;
-      https.request(urls, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payloads) } }).end(payloads);
+      await sendWhatsApp(sub.phone, msg);
 
       Subscribers.updateLastSent(sub.phone);
       console.log(`  ✓ ${sub.phone} (${sub.personality})`);
