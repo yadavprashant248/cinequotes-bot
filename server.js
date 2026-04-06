@@ -49,12 +49,11 @@ function sendWhatsApp(phone, message) {
     const chatId  = toChatId(phone);
     const payload = JSON.stringify({
       chatId,
-      urlFile: 'https://cinequotes-bot.onrender.com/absolute-cinema.png',
-      fileName: 'absolute-cinema.png',
-      caption: message
+      message: message
     });
-    // Updated to use the correct domain and host from your dashboard screenshot
-    const url = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendFileByUrl/${GA_TOKEN}`;
+    
+    // Using sendMessage endpoint for maximum reliability (no external image URL needed)
+    const url = `https://api.green-api.com/waInstance${GA_INSTANCE}/sendMessage/${GA_TOKEN}`;
 
     const req = https.request(url, {
       method: 'POST',
