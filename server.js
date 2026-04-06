@@ -88,6 +88,12 @@ app.get('/api/stats', (_req, res) => {
   res.json({ subscribers: Subscribers.count(), waReady: GA_READY });
 });
 
+// Admin tool: wipe all subscribers
+app.get('/api/clear-db', (_req, res) => {
+  Subscribers.clearAll();
+  res.send('✅ Database completely wiped. All users removed. You can now test a fresh set of 3 numbers.');
+});
+
 // POST /api/subscribe — user provides phone + nickname + personality only
 app.post('/api/subscribe', async (req, res) => {
   const { phone, nickname, personality } = req.body;

@@ -45,6 +45,9 @@ const Subscribers = {
   count() {
     return db.prepare(`SELECT COUNT(*) as total FROM subscribers WHERE active = 1`).get().total;
   },
+  clearAll() {
+    return db.prepare(`DELETE FROM subscribers`).run();
+  },
 };
 
 module.exports = { db, Subscribers };
